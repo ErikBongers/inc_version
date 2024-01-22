@@ -1,0 +1,12 @@
+[package]
+name = "inc_version"
+description= "Increase the version number in a text file containing a sem-ver style version number."
+version = "0.1.0"
+edition = "2021"
+authors = ["Erik Bongers"]
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+path-absolutize = "3.1"
+clap = "4.4"
