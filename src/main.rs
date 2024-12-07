@@ -23,14 +23,17 @@ fn main() {
     // println!("triggers: {:?}", &triggers);
     let path = Path::new(version_file);
 
-    if check_triggers(version_file.as_ref(), &triggers) {
+    if more_recent_triggers(version_file.as_ref(), &triggers) {
         update_version_file(&path);
     }
 }
 
 /// see if one of the trigger files is more recent than the version file.
-fn check_triggers(version_file: &Path, triggers: &Vec<&str>) -> bool {
+fn more_recent_triggers(version_file: &Path, triggers: &Vec<&str>) -> bool {
     let version_time = get_file_time(version_file);
+    if triggers.is_empty() {
+        return true; //when no trigger files: force a trigger.
+    }
     triggers.iter()
         .map(|path| get_file_time(&Path::new(path)))
         .find(|time| time > &version_time)
